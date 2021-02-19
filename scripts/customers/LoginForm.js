@@ -1,6 +1,7 @@
 import { authHelper } from "../auth/authHelper.js"
 import { customerLogin } from "./CustomerProvider.js"
 
+
 const eventHub = document.querySelector("#container")
 const contentTarget = document.querySelector(".form__login")
 
@@ -33,16 +34,15 @@ const render = () => {
 eventHub.addEventListener("click", e => {
   if (e.target.id === "customerLogin") {
     e.preventDefault()
-    const loginEmail = document.querySelector(".login-email")
-    const loginPassword = document.querySelector(".login-password")
-     debugger;
+    const loginEmail = document.querySelector("#login-email").value
+    const loginPassword = document.querySelector("#login-password").value
+    // debugger
+     
     customerLogin(loginEmail, loginPassword)
       .then(user => {
         if (user) {
           contentTarget.innerHTML = ""
-
           authHelper.storeUserInSessionStorage(user.id)
-
           const customEvent = new CustomEvent("userLoggedIn")
           eventHub.dispatchEvent(customEvent)
         } else {
