@@ -11,7 +11,7 @@ eventHub.addEventListener("showNewReviewForm", customEvent => {
 })
 
 const renderForm = (arrayOfProducts) => {
-    const stringOfProductOptions = arrayOfProducts.map(product => `option value="${product.id}">${product.name}</option>`)
+    const stringOfProductOptions = arrayOfProducts.map(product => `<option value="${product.id}">${product.name}</option>`)
     contentTarget.innerHTML = `
     <label for="review-dropdown">Leave a Review for: </label>
     <select id="review--product" class="reviewProduct">
@@ -19,10 +19,9 @@ const renderForm = (arrayOfProducts) => {
     ${stringOfProductOptions.join("")}
     </select>
     
-    <label for="review-product">Product: </label>
-    <input type="text" id="review--product">
+
     
-    <label for="review-reviewer">Product: </label>
+    <label for="review-reviewer">Comments: </label>
     <input type="text" id="review--reviewer">
     
     <label for="review-body">Review: </label>
@@ -39,6 +38,7 @@ export const ReviewForm = () => {
     getProducts()
         .then(() => {
             const arrayOfProducts = useProducts()
+            
             renderForm(arrayOfProducts)
         })
 }
